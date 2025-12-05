@@ -1,11 +1,3 @@
-/**
-* Template Name: Style
-* Template URL: https://bootstrapmade.com/style-bootstrap-portfolio-template/
-* Updated: Jul 02 2025 with Bootstrap v5.3.7
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 (function() {
   "use strict";
 
@@ -240,4 +232,63 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  const toggleButton = document.getElementById('theme-toggle');
+  const body = document.body;
+  const themeIcon = document.getElementById('theme-icon');
+  const storageKey = 'user-theme';
+  const darkThemeClass = 'dark-theme';
+
+  /**
+   * Define o tema e salva no localStorage.
+   * @param {string} theme - 'dark' ou 'light'.
+   */
+  function setTheme(theme) {
+    if (theme === 'dark') {
+      body.classList.add(darkThemeClass);
+      localStorage.setItem(storageKey, 'dark');
+      themeIcon.textContent = '🌙'; // Ícone de lua para modo escuro
+    } else {
+      body.classList.remove(darkThemeClass);
+      localStorage.setItem(storageKey, 'light');
+      themeIcon.textContent = '☀️'; // Ícone de sol para modo claro
+    }
+  }
+
+  /**
+   * Inicializa o tema baseado na preferência salva ou do sistema.
+   */
+  function initializeTheme() {
+    const savedTheme = localStorage.getItem(storageKey);
+
+    // 1. Tenta usar o tema salvo
+    if (savedTheme) {
+      setTheme(savedTheme);
+      return;
+    }
+
+    // 2. Se não houver tema salvo, verifica a preferência do sistema operacional
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (prefersDark) {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
+
+  // --- Execução ---
+
+  // 1. Inicializa o tema ao carregar a página
+  initializeTheme();
+
+  // 2. Adiciona o evento de clique no botão
+  if (toggleButton) { // Garante que o botão existe antes de adicionar o evento
+    toggleButton.addEventListener('click', () => {
+      // Verifica se o corpo JÁ tem a classe dark-theme
+      const isDark = body.classList.contains(darkThemeClass);
+
+      // Se for escuro, muda para claro; senão, muda para escuro.
+      setTheme(isDark ? 'light' : 'dark');
+    });
+  }
 })();

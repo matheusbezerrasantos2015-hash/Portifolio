@@ -1,68 +1,117 @@
-/**
-* Template Name: Style
-* Template URL: https://bootstrapmade.com/style-bootstrap-portfolio-template/
-* Updated: Jul 02 2025 with Bootstrap v5.3.7
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 @charset "UTF-8";
-
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
 /* Fonts */
 :root {
   --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Quicksand",  sans-serif;
   --nav-font: "Open Sans",  sans-serif;
 }
-
-/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #314862; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #13447f; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #065cc2; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
-}
-
-/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+/* Definição de Cores Padrão (Tema CLARO) - Estas são as cores aplicadas por padrão (quando body NÃO tem a classe .dark-theme) */
 :root {
-  --nav-color: #314862;  /* The default color of the main navmenu links */
-  --nav-hover-color: #065cc2; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #11427d; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #065cc2; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #acc4e0; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #ffffff; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
-}
-
-/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
-
-.light-background {
-  --background-color: #f7faff;
-  --surface-color: #ffffff;
-}
-
-.dark-background {
-  --background-color: #065cc2;
-  --default-color: #ffffff;
-  --heading-color: #ffffff;
-  --accent-color: #afcdf1;
-  --surface-color: #2973cc;
+  --background-color: #ffffff;/* Fundo principal: Branco */
+  --default-color: #314862;/* Texto principal: Azul escuro/cinza */
+  --heading-color: #13447f;/* Títulos: Azul escuro */
+  --accent-color: #065cc2;/* Destaque: Azul brilhante */
+  --surface-color: #f7faff;/* Fundo de cartões/caixas: Branco suave (light-background) */
   --contrast-color: #ffffff;
+
+  /* Cores Nav Menu (Claro) */
+  --nav-color: #314862;
+  --nav-hover-color: #065cc2;
+  --nav-mobile-background-color: #11427d;
+  --nav-dropdown-background-color: #065cc2;
+  --nav-dropdown-color: #acc4e0;
+  --nav-dropdown-hover-color: #ffffff;
 }
 
-/* Smooth scroll */
-:root {
-  scroll-behavior: smooth;
+/* Color Presets: Tema ESCURO (Preto) */
+/* Aplicamos esta classe ao <body> para MUDAR TODAS as variáveis de cor para o modo escuro */
+body.dark-theme {
+  --background-color: #121212;/* Fundo principal: Preto absoluto ou muito escuro */
+  --default-color: #e0e0e0;/* Texto principal: Cinza claro */
+  --heading-color: #ffffff;/* Títulos: Branco */
+  --accent-color: #8cafff;/* Destaque: Azul claro/pastel (para contraste) */
+  --surface-color: #1e1e1e;/* Cartões/Caixas: Cinza escuro */
+  --contrast-color: #121212;/* Cor de contraste do texto (para botões de destaque) */
+
+  /* Cores Nav Menu (Escuro) - Ajustadas para o tema preto */
+  --nav-color: #e0e0e0;
+  --nav-hover-color: #8cafff;
+  --nav-mobile-background-color: #000000;
+  --nav-dropdown-background-color: #8cafff;
+  --nav-dropdown-color: #121212;
+  --nav-dropdown-hover-color: #ffffff;
 }
 
-/*--------------------------------------------------------------
-# General Styling & Shared Classes
---------------------------------------------------------------*/
+/* Estilos de Transição e Geral */
+
+body {
+  /* Transição em todas as variáveis de cor para que a mudança seja suave */
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    --background-color 0.4s ease,
+    --default-color 0.4s ease,
+    --heading-color 0.4s ease,
+    --accent-color 0.4s ease,
+    --surface-color 0.4s ease;
+}
+
+/* Estilização Moderna e Limpa para o Botão de Alternância de Tema */
+
+#theme-toggle {
+  /* Layout e Posição (ajuste conforme a necessidade do seu layout) */
+  position: fixed;/* Fixa o botão na tela */
+  top: 20px;
+  left: 20px;
+  z-index: 1000;/* Garante que fique acima de outros elementos */
+  /* Aparência */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;/* Tamanho fixo */
+  height: 48px;
+  padding: 0;
+  /* Cores e Fundo */
+  background-color: var(--surface-color);/* Fundo do botão (muda no dark mode) */
+  color: var(--default-color);/* Cor do ícone */
+  /* Borda e Sombra */
+  border: none;/* Remove a borda padrão */
+  border-radius: 50%;/* Torna o botão perfeitamente redondo */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);/* Sombra suave para profundidade */
+  /* Interatividade */
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+}
+
+#theme-toggle:hover {
+  background-color: color-mix(in srgb, var(--surface-color), var(--accent-color) 10%);/* Pequeno destaque no hover */
+  transform: translateY(-1px);/* Efeito de elevação sutil */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+#theme-toggle:active {
+  transform: scale(0.95);/* Efeito de clique */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#theme-icon {
+  /* Estilização do Ícone (sol/lua) */
+  font-size: 1.5rem;/* Tamanho do ícone */
+  line-height: 1;
+  display: block;
+  transition: transform 0.3s ease;/* Transição para o efeito de rotação */
+}
+
+/* Efeito Bônus: Rotação no Clique */
+#theme-toggle:hover #theme-icon {
+  transform: rotate(15deg);
+}
+
+/* Aplica as variáveis CSS ao corpo, para que as mudanças funcionem */
 body {
   color: var(--default-color);
   background-color: var(--background-color);
@@ -140,6 +189,38 @@ h6 {
   100% {
     transform: rotate(360deg);
   }
+}
+
+button[type="submit"] {
+  display: inline-block;
+  padding: 12px 28px;
+  font-family: var(--default-font);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: color-mix(in srgb, var(--accent-color), black 10%);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+  background-color: color-mix(in srgb, var(--accent-color), white 5%);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: translateY(1px);
 }
 
 /*--------------------------------------------------------------
