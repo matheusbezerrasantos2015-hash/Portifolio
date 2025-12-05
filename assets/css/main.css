@@ -61,7 +61,7 @@ body {
 #theme-toggle {
   /* Layout e Posição (ajuste conforme a necessidade do seu layout) */
   position: fixed;/* Fixa o botão na tela */
-  top: 20px;
+  top: 10px;
   left: 20px;
   z-index: 1000;/* Garante que fique acima de outros elementos */
   /* Aparência */
@@ -223,6 +223,222 @@ button[type="submit"]:active {
   transform: translateY(1px);
 }
 
+/* ============================================================
+  HEADER MODERNO PREMIUM
+   ============================================================ */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 76px;
+  padding: 0 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition: 0.3s ease;
+  z-index: 999;
+}
+
+/* Header sólido ao rolar */
+.header.scrolled {
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  height: 70px;
+}
+
+/* ============================================================
+  MENU DESKTOP CENTRALIZADO (Apple/Stripe Style)
+   ============================================================ */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  /* empurra o menu pro centro */
+}
+
+.nav-links ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 46px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.nav-links ul li {
+  position: relative;
+  color: #ffffffd8;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  padding: 6px 0;
+  text-align: center;
+}
+
+/* Hover suave */
+.nav-links ul li:hover {
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Linha animada (estilo Stripe) */
+.nav-links ul li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #4c8cff, #6d9eff);
+  transition: 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-links ul li:hover::after,
+.nav-links ul li.active::after {
+  width: 100%;
+}
+
+.nav-links ul li.active {
+  color: #fff;
+}
+
+/* ============================================================
+  RESPONSIVO: ESCONDE MENU E MOSTRA MOBILE
+   ============================================================ */
+@media (max-width: 900px) {
+  .header {
+    padding: 0 30px;
+  }
+
+  .nav-links ul {
+    display: none;
+  }
+}
+
+/* ============================================================
+  BOTÃO MOBILE (Hamburger)
+   ============================================================ */
+.mobile-toggle {
+  width: 34px;
+  height: 26px;
+  display: none;
+  /* só aparece no mobile */
+  flex-direction: column;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.mobile-toggle span {
+  width: 100%;
+  height: 3px;
+  background: #fff;
+  border-radius: 8px;
+  transition: 0.35s ease;
+}
+
+/* Aparece só no mobile */
+@media (max-width: 900px) {
+  .mobile-toggle {
+    display: flex;
+  }
+}
+
+/* ============================================================
+  MOBILE MENU (side panel premium)
+   ============================================================ */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100vh;
+
+  background: rgba(15, 15, 20, 0.72);
+  backdrop-filter: blur(22px);
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+
+  transition: 0.35s ease;
+  z-index: 1000;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu ul li a {
+  display: block;
+  padding: 18px 32px;
+  font-size: 1.2rem;
+  color: #e4e4e4;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.mobile-menu ul li a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+  OVERLAY ESCURO (fundo atrás do menu)
+   ============================================================ */
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.35s ease;
+  z-index: 998;
+}
+
+/* ============================================================
+  ESTADO ATIVO (menu aberto)
+   ============================================================ */
+.header.mobile-active .mobile-menu {
+  right: 0;
+}
+
+.header.mobile-active .mobile-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Ícone hamburger → X */
+.header.mobile-active .mobile-toggle span:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+
+.header.mobile-active .mobile-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.header.mobile-active .mobile-toggle span:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
+}
 
 /*--------------------------------------------------------------
 # Global Footer
